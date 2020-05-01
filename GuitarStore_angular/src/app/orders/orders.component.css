@@ -1,0 +1,21 @@
+h2{
+    position: relative;
+    top: 300px;
+}
+
+ul{
+    position: absolute;
+    top: 400px;
+}
+
+h3{
+    position: absolute;
+    top: 450px;
+    right: 0px;
+}
+
+button{
+    position: absolute;
+    top: 480px;
+    right: 0px;
+}

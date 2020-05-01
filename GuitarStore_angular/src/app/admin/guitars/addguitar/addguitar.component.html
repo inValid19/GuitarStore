@@ -1,0 +1,17 @@
+<h1>Add Guitar Admin</h1>
+
+<form>
+  <label for="name">Name</label>
+  <input type="text" class="form-control" id="name" placeholder="Guitar Name" name="name" [(ngModel)]="guitar.name">
+
+  <label for="type">Type</label>
+  <input type="text" class="form-control" id="author" placeholder="type" name="type" [(ngModel)]="guitar.type">
+
+  <label for="price">Price</label>
+  <input type="text" class="form-control" id="price" placeholder="price" name="price" [(ngModel)]="guitar.price">
+
+  <!--<label for="img">Select image:</label>
+  <input type="file" id="img" name="img" accept="image/*">-->
+
+  <button type="button" class="btn btn-success" (click)="saveGuitar()">Save Guitar</button>
+</form>

@@ -1,0 +1,43 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div><a href="http://localhost:4200/" class="navbar-brand" type="button" (click)="toggleCollapsed()">GuitarStore</a></div>
+        <!--<ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a routerLink="/admin/users" class="dropdown-item">Users</a>
+                    <a routerLink="/admin/guitars" class="dropdown-item">Guitars</a>
+                </div>
+            </li>
+        </ul>-->
+        <ul class="navbar-nav">
+            <a *ngIf="loginService.isUserLoggedIn()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a *ngIf="loginService.isUserLoggedIn()" routerLink="/admin/users" class="dropdown-item">Users</a>
+                    <a *ngIf="loginService.isUserLoggedIn()" routerLink="/admin/guitars" class="dropdown-item">Guitars</a>
+                </div>
+                    <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="login_logout">Login</a>
+                    <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="login_logout">LogOut</a>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- <div class="row">
+    <div class="col-md-9">
+        <app-guitars  #guitarsC [hidden]="orderFinished"></app-guitars>
+    </div>
+    <div class="col-md-3">
+        <app-shopping-cart (onOrderFinished)=finishOrder($event) #shoppingCartC
+                           [hidden]="orderFinished"></app-shopping-cart>
+    </div>
+    <div class="col-md-6 offset-3">
+        <app-orders #ordersC [hidden]="!orderFinished"></app-orders>
+    </div>
+</div> -->

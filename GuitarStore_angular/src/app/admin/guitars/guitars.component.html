@@ -1,0 +1,74 @@
+<h1>Guitars Admin</h1>
+<a class="btn btn-primary mb-3" (click)="addGuitar()">Add New Guitar</a>
+<div class="container row">
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Guitar Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let guitar of guitars">
+          <td>{{guitar.id}}</td>
+          <td>{{guitar.name}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="viewGuitar(guitar.id)">Show Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <app-viewguitar *ngIf="action === 'view'" [guitar]="selectedGuitar" (guitarDeletedEvent)="refreshData()"></app-viewguitar>
+    <app-addguitar *ngIf="action === 'add'" [guitar]="selectedGuitar" (guitarAddedEvent)="refreshData()"></app-addguitar>
+  </div>
+</div>
+
+
+<div class="row card-deck">
+  <div class="col-lg-4 col-md-6 mb-4" *ngFor="let order of guitarOrders">
+      <div class="card text-center">
+          <div class="card-header">
+              <h4>{{order.guitar.name}}</h4>
+          </div>
+          <div class="card-body">
+              <a href="#">
+                <img class="card-img-top" src={{order.guitar.pictureUrl}} alt="">
+              </a>
+              <h5 class="card-title">${{order.guitar.price}}</h5>
+              <div class="row">
+                  <div class="col-4 padding-0" *ngIf="!isGuitarSelected(order.guitar)">
+                      <input type="number" min="0" class="form-control" [(ngModel)]=order.quantity>
+                  </div>
+                  <div class="col-4 padding-0" *ngIf="!isGuitarSelected(order.guitar)">
+                      <button class="btn btn-primary" (click)="addToCart(order)"
+                              [disabled]="order.quantity <= 0">Add To Cart
+                      </button>
+                  </div>
+                  <div class="col-12" *ngIf="isGuitarSelected(order.guitar)">
+                      <button class="btn btn-primary btn-block"
+                              (click)="removeFromCart(order)">Remove From Cart
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <p  #guitarsC [hidden]="orderFinished"></p>
+    </div>
+    <div class="col-md-3">
+        <app-shopping-cart (onOrderFinished)=finishOrder($event) #shoppingCartC
+                           [hidden]="orderFinished"></app-shopping-cart>
+    </div>
+    <div class="col-md-6 offset-3">
+        <app-orders #ordersC [hidden]="!orderFinished"></app-orders>
+    </div>
+</div>

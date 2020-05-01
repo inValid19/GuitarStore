@@ -1,0 +1,14 @@
+server:
+  port: 8484
+zuul:
+  routes:
+    users:
+      path: /users/**
+      serviceId: user_microservice
+      url: http://localhost:8989/users
+    guitars:
+      path: /guitars/**
+      serviceId: guitar_microservice
+      url: http://localhost:9898/guitars
+  sensitive-headers:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
